@@ -87,24 +87,22 @@ async def handle_furniture_lookup(
             if matches:
                 seen_ids.add(layout.get("id"))
                 # Add to results (summary only, not full layout)
-                results.append(
-                    {
-                        "name": layout.get("name"),
-                        "id": layout.get("id"),
-                        "category": layout.get("category"),
-                        "subcategory": layout.get("subcategory"),
-                        "tags": layout.get("tags", []),
-                        "bounds": layout.get("bounds"),
-                        "materials_count": sum(layout.get("materials", {}).values()),
-                        "notes": (
-                            layout.get("notes", "")[:100] + "..."
-                            if len(layout.get("notes", "")) > 100
-                            else layout.get("notes", "")
-                        ),
-                        "has_layout": True,
-                        "source": "layout",
-                    }
-                )
+                results.append({
+                    "name": layout.get("name"),
+                    "id": layout.get("id"),
+                    "category": layout.get("category"),
+                    "subcategory": layout.get("subcategory"),
+                    "tags": layout.get("tags", []),
+                    "bounds": layout.get("bounds"),
+                    "materials_count": sum(layout.get("materials", {}).values()),
+                    "notes": (
+                        layout.get("notes", "")[:100] + "..."
+                        if len(layout.get("notes", "")) > 100
+                        else layout.get("notes", "")
+                    ),
+                    "has_layout": True,
+                    "source": "layout",
+                })
 
         # Then, search through catalog items (text-based instructions)
         for item in furniture_items:
@@ -136,20 +134,18 @@ async def handle_furniture_lookup(
                         description = text[:100] + "..." if len(text) > 100 else text
                         break
 
-                results.append(
-                    {
-                        "name": item.get("name"),
-                        "id": item.get("id"),
-                        "category": item.get("category"),
-                        "subcategory": item.get("subcategory"),
-                        "tags": [],
-                        "bounds": None,
-                        "materials_count": 0,
-                        "notes": description,
-                        "has_layout": False,
-                        "source": "catalog",
-                    }
-                )
+                results.append({
+                    "name": item.get("name"),
+                    "id": item.get("id"),
+                    "category": item.get("category"),
+                    "subcategory": item.get("subcategory"),
+                    "tags": [],
+                    "bounds": None,
+                    "materials_count": 0,
+                    "notes": description,
+                    "has_layout": False,
+                    "source": "catalog",
+                })
 
         if not results:
             search_params = []
@@ -488,13 +484,11 @@ async def handle_place_furniture(
         ]
         for cmd in executed_commands[-10:]:
             failure_output.append(f"- `{cmd}`")
-        failure_output.extend(
-            [
-                "",
-                f"Error: {exc}",
-                "Use `//undo` to revert the changes if necessary.",
-            ]
-        )
+        failure_output.extend([
+            "",
+            f"Error: {exc}",
+            "Use `//undo` to revert the changes if necessary.",
+        ])
         return [TextContent(type="text", text="\n".join(failure_output))]
 
     materials = layout.get("materials", {})

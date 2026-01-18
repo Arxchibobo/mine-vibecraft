@@ -153,13 +153,11 @@ async def handle_place_building_pattern(
         ]
         for cmd in executed_commands[-10:]:
             failure_output.append(f"- `{cmd}`")
-        failure_output.extend(
-            [
-                "",
-                f"Error: {exc}",
-                "Use `//undo` to revert the changes if necessary.",
-            ]
-        )
+        failure_output.extend([
+            "",
+            f"Error: {exc}",
+            "Use `//undo` to revert the changes if necessary.",
+        ])
         return [TextContent(type="text", text="\n".join(failure_output))]
 
     palette = structured.get("palette", {})

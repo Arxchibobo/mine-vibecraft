@@ -425,58 +425,50 @@ class TerrainAnalyzer:
                         count = int(match.group(1))
                         if count > 0:
                             percentage = round(count / total_blocks * 100, 2)
-                            hazards.append(
-                                {
-                                    "type": description,
-                                    "severity": (
-                                        "high"
-                                        if percentage > 5
-                                        else "medium"
-                                        if percentage > 1
-                                        else "low"
-                                    ),
-                                    "count": count,
-                                    "percentage": percentage,
-                                    "recommendation": f"Exercise caution - {description} present",
-                                }
-                            )
+                            hazards.append({
+                                "type": description,
+                                "severity": (
+                                    "high"
+                                    if percentage > 5
+                                    else "medium"
+                                    if percentage > 1
+                                    else "low"
+                                ),
+                                "count": count,
+                                "percentage": percentage,
+                                "recommendation": f"Exercise caution - {description} present",
+                            })
             except Exception as e:
                 logger.debug(f"Failed to count {block}: {e}")
 
         # Check for water bodies from composition
         water_pct = composition.get("liquids", {}).get("percentage", 0)
         if water_pct > 10:
-            hazards.append(
-                {
-                    "type": "Water bodies",
-                    "severity": "medium" if water_pct > 30 else "low",
-                    "percentage": water_pct,
-                    "recommendation": "Consider drainage or bridges for building",
-                }
-            )
+            hazards.append({
+                "type": "Water bodies",
+                "severity": "medium" if water_pct > 30 else "low",
+                "percentage": water_pct,
+                "recommendation": "Consider drainage or bridges for building",
+            })
 
         # Check for steep terrain
         if elevation_stats.get("std_dev", 0) > 15:
-            hazards.append(
-                {
-                    "type": "Steep terrain",
-                    "severity": "medium",
-                    "details": f"Elevation variance: {elevation_stats.get('std_dev')} blocks",
-                    "recommendation": "Terrain leveling or terracing may be required",
-                }
-            )
+            hazards.append({
+                "type": "Steep terrain",
+                "severity": "medium",
+                "details": f"Elevation variance: {elevation_stats.get('std_dev')} blocks",
+                "recommendation": "Terrain leveling or terracing may be required",
+            })
 
         # Check for caves/cavities
         air_pct = composition.get("air_cavities", {}).get("percentage", 0)
         if air_pct > 5:
-            hazards.append(
-                {
-                    "type": "Underground cavities",
-                    "severity": "medium",
-                    "percentage": air_pct,
-                    "recommendation": "Fill caves or reinforce foundations",
-                }
-            )
+            hazards.append({
+                "type": "Underground cavities",
+                "severity": "medium",
+                "percentage": air_pct,
+                "recommendation": "Fill caves or reinforce foundations",
+            })
 
         return hazards
 
@@ -533,69 +525,57 @@ class TerrainAnalyzer:
         # Flat terrain
         std_dev = elevation_stats.get("std_dev", 0)
         if std_dev < 3:
-            opportunities.append(
-                {
-                    "type": "Flat terrain",
-                    "quality": "excellent",
-                    "description": f"Very flat area ({std_dev} blocks variation)",
-                    "use_cases": "Ideal for large structures, farms, planned cities",
-                }
-            )
+            opportunities.append({
+                "type": "Flat terrain",
+                "quality": "excellent",
+                "description": f"Very flat area ({std_dev} blocks variation)",
+                "use_cases": "Ideal for large structures, farms, planned cities",
+            })
         elif std_dev < 6:
-            opportunities.append(
-                {
-                    "type": "Gentle terrain",
-                    "quality": "good",
-                    "description": f"Gently sloping area ({std_dev} blocks variation)",
-                    "use_cases": "Suitable for terraced builds, gardens",
-                }
-            )
+            opportunities.append({
+                "type": "Gentle terrain",
+                "quality": "good",
+                "description": f"Gently sloping area ({std_dev} blocks variation)",
+                "use_cases": "Suitable for terraced builds, gardens",
+            })
 
         # Dramatic elevation
         if elevation_stats.get("range", 0) > 20:
-            opportunities.append(
-                {
-                    "type": "Dramatic elevation change",
-                    "quality": "good",
-                    "description": f"{elevation_stats.get('range')} blocks elevation difference",
-                    "use_cases": "Cliff-side builds, waterfalls, observation towers",
-                }
-            )
+            opportunities.append({
+                "type": "Dramatic elevation change",
+                "quality": "good",
+                "description": f"{elevation_stats.get('range')} blocks elevation difference",
+                "use_cases": "Cliff-side builds, waterfalls, observation towers",
+            })
 
         # Coastline
         liquid_pct = composition.get("liquids", {}).get("percentage", 0)
         if 10 < liquid_pct < 50:
-            opportunities.append(
-                {
-                    "type": "Coastline",
-                    "quality": "excellent",
-                    "description": "Mix of water and land",
-                    "use_cases": "Docks, harbors, beachfront properties",
-                }
-            )
+            opportunities.append({
+                "type": "Coastline",
+                "quality": "excellent",
+                "description": "Mix of water and land",
+                "use_cases": "Docks, harbors, beachfront properties",
+            })
 
         # Forested area
         veg_pct = composition.get("vegetation", {}).get("percentage", 0)
         if veg_pct > 20:
-            opportunities.append(
-                {
-                    "type": "Forested area",
-                    "quality": "good",
-                    "description": f"{round(veg_pct, 1)}% vegetation coverage",
-                    "use_cases": "Tree houses, nature builds, hidden bases",
-                }
-            )
+            opportunities.append({
+                "type": "Forested area",
+                "quality": "good",
+                "description": f"{round(veg_pct, 1)}% vegetation coverage",
+                "use_cases": "Tree houses, nature builds, hidden bases",
+            })
 
         # Large buildable area
         if width > 50 and depth > 50 and std_dev < 5:
-            opportunities.append(
-                {
-                    "type": "Large buildable area",
-                    "quality": "excellent",
-                    "description": f"{width}×{depth} blocks with minimal elevation change",
-                    "use_cases": "Mega builds, planned districts, arenas",
-                }
-            )
+            opportunities.append({
+                "type": "Large buildable area",
+                "quality": "excellent",
+                "description": f"{width}×{depth} blocks with minimal elevation change",
+                "use_cases": "Mega builds, planned districts, arenas",
+            })
 
         return opportunities
 

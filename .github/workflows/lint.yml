@@ -24,10 +24,10 @@ jobs:
         cd mcp-server
         uv sync --extra dev
 
-    - name: Run Black (code formatting check)
+    - name: Run Ruff format (code formatting check)
       run: |
         cd mcp-server
-        uv run black --check --line-length 100 src/
+        uv run ruff format --check src/
 
     - name: Run Ruff (linting)
       run: |

@@ -85,18 +85,16 @@ class BuildWorkflowCoordinator:
             else:
                 status = "pending"
 
-            phase_status.append(
-                {
-                    "id": phase.identifier,
-                    "name": phase.name,
-                    "status": status,
-                    "required_validations": phase.required_validations,
-                    "completed_validations": {
-                        vt: len(self.state.get("validations", {}).get(vt, []))
-                        for vt in phase.required_validations
-                    },
-                }
-            )
+            phase_status.append({
+                "id": phase.identifier,
+                "name": phase.name,
+                "status": status,
+                "required_validations": phase.required_validations,
+                "completed_validations": {
+                    vt: len(self.state.get("validations", {}).get(vt, []))
+                    for vt in phase.required_validations
+                },
+            })
 
         return {
             "current_phase": current,

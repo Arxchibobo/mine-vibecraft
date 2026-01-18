@@ -314,12 +314,10 @@ async def handle_build(
     else:
         result_lines.append("✅ Build completed successfully!")
 
-    result_lines.extend(
-        [
-            "",
-            f"📊 Stats: {command_count} commands executed",
-        ]
-    )
+    result_lines.extend([
+        "",
+        f"📊 Stats: {command_count} commands executed",
+    ])
 
     logger_instance.info(f"Build complete: {description}")
 

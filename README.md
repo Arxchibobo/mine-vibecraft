@@ -277,6 +277,10 @@ MIT License - see [LICENSE](LICENSE).
 - 📧 Email: [evan@amentilabs.com](mailto:evan@amentilabs.com)
 - 🐛 Issues: [GitHub Issues](https://github.com/amenti-labs/vibecraft/issues)
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=amenti-labs/vibecraft&type=Date)](https://star-history.com/#amenti-labs/vibecraft&Date)
+
 ---
 
 **Happy building!** 🧱
