@@ -1,0 +1,328 @@
+{
+  "version": "1.0.0",
+  "description": "Claude Code Plugins manifest for visualization",
+  "plugins": [
+    {
+      "name": "python-development",
+      "category": "development",
+      "agents": ["django-pro", "fastapi-pro", "python-pro"],
+      "skills": ["async-python-patterns", "python-packaging", "python-performance-optimization", "python-testing-patterns", "uv-package-manager"],
+      "commands": []
+    },
+    {
+      "name": "kubernetes-operations",
+      "category": "infrastructure",
+      "agents": ["kubernetes-architect"],
+      "skills": ["gitops-workflow", "helm-chart-scaffolding", "k8s-manifest-generator", "k8s-security-policies"],
+      "commands": []
+    },
+    {
+      "name": "security-scanning",
+      "category": "security",
+      "agents": ["security-auditor", "threat-modeling-expert"],
+      "skills": ["attack-tree-construction", "security-sast"],
+      "commands": []
+    },
+    {
+      "name": "full-stack-orchestration",
+      "category": "development",
+      "agents": ["deployment-engineer", "performance-engineer", "security-auditor", "test-automator"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "debugging-toolkit",
+      "category": "debugging",
+      "agents": ["debugger", "dx-optimizer"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "backend-development",
+      "category": "backend",
+      "agents": ["backend-architect", "event-sourcing-architect", "graphql-architect", "tdd-orchestrator", "temporal-python-pro"],
+      "skills": ["api-design-principles", "architecture-patterns", "microservices-patterns"],
+      "commands": ["feature-development"]
+    },
+    {
+      "name": "frontend-mobile-development",
+      "category": "frontend",
+      "agents": ["frontend-developer", "mobile-developer"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "multi-platform-apps",
+      "category": "development",
+      "agents": ["backend-architect", "flutter-expert", "frontend-developer", "ios-developer", "mobile-developer", "ui-ux-designer"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "code-documentation",
+      "category": "documentation",
+      "agents": ["code-reviewer", "docs-architect", "tutorial-engineer"],
+      "skills": [],
+      "commands": ["code-explain", "doc-generate"]
+    },
+    {
+      "name": "documentation-generation",
+      "category": "documentation",
+      "agents": ["api-documenter", "docs-architect", "mermaid-expert", "reference-builder", "tutorial-engineer"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "git-pr-workflows",
+      "category": "git",
+      "agents": ["code-reviewer"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "tdd-workflows",
+      "category": "testing",
+      "agents": ["code-reviewer", "tdd-orchestrator"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "unit-testing",
+      "category": "testing",
+      "agents": ["debugger", "test-automator"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "code-review-ai",
+      "category": "review",
+      "agents": ["architect-review"],
+      "skills": [],
+      "commands": ["ai-review"]
+    },
+    {
+      "name": "comprehensive-review",
+      "category": "review",
+      "agents": ["architect-review", "code-reviewer", "security-auditor"],
+      "skills": [],
+      "commands": ["full-review", "pr-enhance"]
+    },
+    {
+      "name": "performance-testing-review",
+      "category": "performance",
+      "agents": ["performance-engineer", "test-automator"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "code-refactoring",
+      "category": "refactoring",
+      "agents": ["code-reviewer", "legacy-modernizer"],
+      "skills": [],
+      "commands": ["context-restore", "refactor-clean", "tech-debt"]
+    },
+    {
+      "name": "dependency-management",
+      "category": "development",
+      "agents": ["legacy-modernizer"],
+      "skills": ["dependency-upgrade"],
+      "commands": []
+    },
+    {
+      "name": "error-debugging",
+      "category": "debugging",
+      "agents": ["debugger", "error-detective"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "llm-application-dev",
+      "category": "ai",
+      "agents": ["ai-engineer", "prompt-engineer", "vector-database-engineer"],
+      "skills": ["rag-implementation", "prompt-engineering-patterns", "langchain-architecture"],
+      "commands": []
+    },
+    {
+      "name": "agent-orchestration",
+      "category": "ai",
+      "agents": ["context-manager"],
+      "skills": [],
+      "commands": ["improve-agent", "multi-agent-optimize"]
+    },
+    {
+      "name": "context-management",
+      "category": "ai",
+      "agents": ["context-manager"],
+      "skills": [],
+      "commands": ["context-restore", "context-save"]
+    },
+    {
+      "name": "machine-learning-ops",
+      "category": "ml",
+      "agents": ["data-scientist", "ml-engineer", "mlops-engineer"],
+      "skills": ["ml-pipeline-workflow"],
+      "commands": []
+    },
+    {
+      "name": "data-engineering",
+      "category": "data",
+      "agents": ["backend-architect", "data-engineer"],
+      "skills": [],
+      "commands": ["data-driven-feature", "data-pipeline"]
+    },
+    {
+      "name": "database-design",
+      "category": "database",
+      "agents": ["database-architect", "sql-pro"],
+      "skills": ["sql-optimization-patterns"],
+      "commands": []
+    },
+    {
+      "name": "database-migrations",
+      "category": "database",
+      "agents": ["database-admin", "database-optimizer"],
+      "skills": ["database-migration", "migration-observability", "sql-migrations"],
+      "commands": []
+    },
+    {
+      "name": "incident-response",
+      "category": "devops",
+      "agents": ["devops-troubleshooter", "incident-responder"],
+      "skills": ["slo-implementation"],
+      "commands": []
+    },
+    {
+      "name": "observability-monitoring",
+      "category": "devops",
+      "agents": ["database-optimizer", "network-engineer", "observability-engineer", "performance-engineer"],
+      "skills": ["prometheus-configuration", "grafana-dashboards", "distributed-tracing"],
+      "commands": []
+    },
+    {
+      "name": "cloud-infrastructure",
+      "category": "infrastructure",
+      "agents": ["cloud-architect", "deployment-engineer", "hybrid-cloud-architect", "kubernetes-architect", "network-engineer", "service-mesh-expert", "terraform-specialist"],
+      "skills": ["cost-optimization", "hybrid-cloud-networking", "multi-cloud-architecture", "terraform-module-library"],
+      "commands": []
+    },
+    {
+      "name": "cicd-automation",
+      "category": "devops",
+      "agents": ["cloud-architect", "deployment-engineer", "devops-troubleshooter", "kubernetes-architect", "terraform-specialist"],
+      "skills": ["deployment-pipeline-design", "github-actions-templates", "gitlab-ci-patterns", "secrets-management"],
+      "commands": ["workflow-automate"]
+    },
+    {
+      "name": "blockchain-web3",
+      "category": "blockchain",
+      "agents": ["blockchain-developer"],
+      "skills": ["defi-protocol-templates", "nft-standards", "solidity-security", "web3-testing"],
+      "commands": []
+    },
+    {
+      "name": "game-development",
+      "category": "game",
+      "agents": ["minecraft-bukkit-pro", "unity-developer"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "payment-processing",
+      "category": "integration",
+      "agents": ["payment-integration"],
+      "skills": ["stripe-integration", "paypal-integration", "billing-automation", "pci-compliance"],
+      "commands": []
+    },
+    {
+      "name": "seo-content-creation",
+      "category": "marketing",
+      "agents": ["seo-content-auditor", "seo-content-planner", "seo-content-writer"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "seo-technical-optimization",
+      "category": "marketing",
+      "agents": ["seo-keyword-strategist", "seo-meta-optimizer", "seo-snippet-hunter", "seo-structure-architect"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "content-marketing",
+      "category": "marketing",
+      "agents": ["content-marketer", "search-specialist"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "customer-sales-automation",
+      "category": "sales",
+      "agents": ["customer-support", "sales-automator"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "javascript-typescript",
+      "category": "development",
+      "agents": ["javascript-pro", "typescript-pro"],
+      "skills": ["modern-javascript-patterns", "typescript-advanced-types", "javascript-testing-patterns"],
+      "commands": []
+    },
+    {
+      "name": "systems-programming",
+      "category": "systems",
+      "agents": ["c-pro", "cpp-pro", "golang-pro", "rust-pro"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "jvm-languages",
+      "category": "development",
+      "agents": ["csharp-pro", "java-pro", "scala-pro"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "web-scripting",
+      "category": "development",
+      "agents": ["php-pro", "ruby-pro"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "functional-programming",
+      "category": "development",
+      "agents": ["elixir-pro", "haskell-pro"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "arm-cortex-microcontrollers",
+      "category": "embedded",
+      "agents": ["arm-cortex-expert"],
+      "skills": [],
+      "commands": []
+    },
+    {
+      "name": "accessibility-compliance",
+      "category": "quality",
+      "agents": ["ui-visual-validator"],
+      "skills": [],
+      "commands": ["accessibility-audit"]
+    },
+    {
+      "name": "agent-sdk-dev",
+      "category": "development",
+      "agents": ["agent-sdk-verifier-py", "agent-sdk-verifier-ts"],
+      "skills": [],
+      "commands": ["new-sdk-app"]
+    },
+    {
+      "name": "feature-dev",
+      "category": "development",
+      "agents": ["code-architect", "code-explorer", "code-reviewer"],
+      "skills": [],
+      "commands": ["feature-dev"]
+    }
+  ]
+}

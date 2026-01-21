@@ -1,0 +1,128 @@
+{
+  "version": "1.0.0",
+  "description": "MCP Servers registry for visualization",
+  "servers": [
+    {
+      "name": "vibecraft",
+      "description": "Minecraft WorldEdit integration",
+      "tools": [
+        {"name": "build", "description": "Execute Minecraft commands"},
+        {"name": "get_server_info", "description": "Get server information"},
+        {"name": "get_player_position", "description": "Get player position"},
+        {"name": "worldedit_deform", "description": "Deform selection"},
+        {"name": "worldedit_vegetation", "description": "Add vegetation"},
+        {"name": "worldedit_terrain_advanced", "description": "Advanced terrain"},
+        {"name": "building_template", "description": "Building templates"},
+        {"name": "place_furniture", "description": "Place furniture"},
+        {"name": "calculate_shape", "description": "Calculate shapes"},
+        {"name": "generate_terrain", "description": "Generate terrain"},
+        {"name": "vision_screenshot", "description": "Take screenshot"},
+        {"name": "vision_region_snapshot", "description": "Region snapshot"},
+        {"name": "visualizer_init", "description": "Initialize visualizer"},
+        {"name": "visualizer_update", "description": "Update visualizer"},
+        {"name": "visualizer_highlight", "description": "Highlight element"},
+        {"name": "visualizer_query", "description": "Query visualizer state"},
+        {"name": "visualizer_event", "description": "Process visualizer event"}
+      ]
+    },
+    {
+      "name": "supabase",
+      "description": "Supabase database integration",
+      "tools": [
+        {"name": "search_docs", "description": "Search documentation"},
+        {"name": "list_organizations", "description": "List organizations"},
+        {"name": "list_projects", "description": "List projects"},
+        {"name": "get_project", "description": "Get project details"},
+        {"name": "create_project", "description": "Create project"},
+        {"name": "list_tables", "description": "List database tables"},
+        {"name": "execute_sql", "description": "Execute SQL"},
+        {"name": "apply_migration", "description": "Apply migration"},
+        {"name": "get_logs", "description": "Get logs"},
+        {"name": "deploy_edge_function", "description": "Deploy edge function"},
+        {"name": "generate_typescript_types", "description": "Generate types"}
+      ]
+    },
+    {
+      "name": "stripe",
+      "description": "Stripe payment integration",
+      "tools": [
+        {"name": "search_stripe_documentation", "description": "Search Stripe docs"},
+        {"name": "get_stripe_account_info", "description": "Get account info"},
+        {"name": "list_customers", "description": "List customers"},
+        {"name": "list_products", "description": "List products"},
+        {"name": "list_prices", "description": "List prices"},
+        {"name": "list_invoices", "description": "List invoices"},
+        {"name": "retrieve_balance", "description": "Get balance"},
+        {"name": "list_payment_intents", "description": "List payments"},
+        {"name": "list_subscriptions", "description": "List subscriptions"},
+        {"name": "search_stripe_resources", "description": "Search resources"},
+        {"name": "stripe_integration_recommender", "description": "Integration guide"}
+      ]
+    },
+    {
+      "name": "playwright",
+      "description": "Browser automation",
+      "tools": [
+        {"name": "browser_navigate", "description": "Navigate to URL"},
+        {"name": "browser_click", "description": "Click element"},
+        {"name": "browser_type", "description": "Type text"},
+        {"name": "browser_snapshot", "description": "Page snapshot"},
+        {"name": "browser_take_screenshot", "description": "Take screenshot"},
+        {"name": "browser_evaluate", "description": "Run JavaScript"},
+        {"name": "browser_fill_form", "description": "Fill form"},
+        {"name": "browser_wait_for", "description": "Wait for element"},
+        {"name": "browser_tabs", "description": "Manage tabs"},
+        {"name": "browser_console_messages", "description": "Get console logs"}
+      ]
+    },
+    {
+      "name": "asana",
+      "description": "Asana project management",
+      "tools": [
+        {"name": "asana_list_workspaces", "description": "List workspaces"},
+        {"name": "asana_get_project", "description": "Get project"},
+        {"name": "asana_create_task", "description": "Create task"},
+        {"name": "asana_update_task", "description": "Update task"},
+        {"name": "asana_search_tasks", "description": "Search tasks"},
+        {"name": "asana_get_task", "description": "Get task details"},
+        {"name": "asana_create_project", "description": "Create project"},
+        {"name": "asana_typeahead_search", "description": "Quick search"},
+        {"name": "asana_get_goals", "description": "Get goals"},
+        {"name": "asana_create_goal", "description": "Create goal"}
+      ]
+    },
+    {
+      "name": "bytebase",
+      "description": "Database management",
+      "tools": [
+        {"name": "bytebase-execute_sql", "description": "Execute SQL"},
+        {"name": "bytebase-search_objects", "description": "Search database objects"}
+      ]
+    },
+    {
+      "name": "honeycomb",
+      "description": "Observability platform",
+      "tools": [
+        {"name": "honeycomb-get_workspace_context", "description": "Get workspace context"},
+        {"name": "honeycomb-run_query", "description": "Run query"},
+        {"name": "honeycomb-get_trace", "description": "Get trace"},
+        {"name": "honeycomb-find_columns", "description": "Find columns"},
+        {"name": "honeycomb-find_queries", "description": "Find queries"},
+        {"name": "honeycomb-get_query_results", "description": "Get query results"},
+        {"name": "honeycomb-get_dataset", "description": "Get dataset"},
+        {"name": "honeycomb-get_environment", "description": "Get environment"}
+      ]
+    },
+    {
+      "name": "chart",
+      "description": "Chart generation",
+      "tools": [
+        {"name": "generate_line_chart", "description": "Generate line chart"},
+        {"name": "generate_bar_chart", "description": "Generate bar chart"},
+        {"name": "generate_pie_chart", "description": "Generate pie chart"},
+        {"name": "generate_funnel_chart", "description": "Generate funnel chart"},
+        {"name": "generate_waterfall_chart", "description": "Generate waterfall chart"}
+      ]
+    }
+  ]
+}

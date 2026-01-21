@@ -2618,6 +2618,249 @@ Example: Analyze a building's materials
                 "required": ["x1", "y1", "z1", "x2", "y2", "z2"],
             },
         ),
+        # =====================================================================
+        # CLAUDE CODE VISUALIZER TOOLS
+        # =====================================================================
+        Tool(
+            name="visualizer_init",
+            description="""Initialize the Claude Code Visualization Control Room in Minecraft.
+
+Creates a complete 3D visualization environment at the player's location, including:
+- Skills Matrix (北侧): 9x9 grid showing 81 skills with status indicators
+- MCP Tower (东侧): Vertical tower representing MCP servers and their tools
+- Plugins Garden (西侧): Organic tree layout for plugins
+- Agent Timeline (南侧): Railroad track showing task progress
+- Central Hub (中心): Main console with session stats and controls
+
+Layout Modes:
+- "full": All 5 modules (recommended for first-time setup)
+- "compact": Hub + Timeline only
+- "minimal": Hub only
+
+Example:
+{
+  "layout": "full",
+  "center": [100, 64, 100]  // Optional, defaults to player position
+}
+""",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "layout": {
+                        "type": "string",
+                        "enum": ["full", "compact", "minimal"],
+                        "description": "Layout mode - full (all 5 modules), compact (hub + timeline), minimal (hub only)",
+                        "default": "full",
+                    },
+                    "center": {
+                        "type": "array",
+                        "items": {"type": "integer"},
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "description": "Center coordinates [x, y, z]. Defaults to player position if not provided.",
+                    },
+                },
+            },
+        ),
+        Tool(
+            name="visualizer_update",
+            description="""Update a specific module in the visualization.
+
+Use this to refresh or update individual visualization components without
+rebuilding the entire control room.
+
+Modules:
+- "skills": Update Skills Matrix (skill status changes)
+- "mcp": Update MCP Tower (server status, tool usage)
+- "plugins": Update Plugins Garden
+- "timeline": Update Agent Timeline (task progress)
+- "hub": Update Central Hub (session stats)
+
+Example - Update timeline with new todos:
+{
+  "module": "timeline",
+  "data": {
+    "todos": [
+      {"id": "1", "content": "Fix bug", "status": "completed"},
+      {"id": "2", "content": "Write tests", "status": "in_progress"}
+    ]
+  }
+}
+
+Example - Update MCP server status:
+{
+  "module": "mcp",
+  "data": {
+    "server": "supabase",
+    "status": "online"
+  }
+}
+""",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "module": {
+                        "type": "string",
+                        "enum": ["skills", "mcp", "plugins", "timeline", "hub"],
+                        "description": "Module to update",
+                    },
+                    "data": {
+                        "type": "object",
+                        "description": "Update data (module-specific)",
+                    },
+                },
+                "required": ["module"],
+            },
+        ),
+        Tool(
+            name="visualizer_highlight",
+            description="""Highlight a specific element in the visualization.
+
+Creates a visual highlight effect (particles, glow) on the specified element
+for a duration. Useful for drawing attention to active skills, tools, or plugins.
+
+Element Types:
+- "skill": Highlight a skill in the Skills Matrix
+- "mcp_server": Highlight an MCP server in the MCP Tower
+- "mcp_tool": Highlight a specific tool in the MCP Tower
+- "plugin": Highlight a plugin in the Plugins Garden
+
+Example - Highlight active skill:
+{
+  "type": "skill",
+  "name": "commit",
+  "duration": 5
+}
+
+Example - Highlight MCP server:
+{
+  "type": "mcp_server",
+  "name": "supabase",
+  "duration": 10
+}
+""",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": ["skill", "mcp_server", "mcp_tool", "plugin"],
+                        "description": "Type of element to highlight",
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the element to highlight",
+                    },
+                    "duration": {
+                        "type": "integer",
+                        "description": "Highlight duration in seconds (default: 5)",
+                        "default": 5,
+                    },
+                },
+                "required": ["type", "name"],
+            },
+        ),
+        Tool(
+            name="visualizer_query",
+            description="""Query the current visualization state.
+
+Returns information about the visualization without making changes.
+Useful for debugging or checking status before updates.
+
+Query Types:
+- "layout": Current layout mode and center position
+- "active_elements": Active skills, online MCP servers, running agents
+- "session": Session duration, tool calls, agent spawns, tasks
+- "recent_events": Pending updates and dirty modules
+- "todos": Current todo list
+- "all": All information
+
+Example:
+{
+  "what": "active_elements"
+}
+""",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "what": {
+                        "type": "string",
+                        "enum": ["layout", "active_elements", "session", "recent_events", "todos", "all"],
+                        "description": "What to query",
+                        "default": "all",
+                    },
+                },
+            },
+        ),
+        Tool(
+            name="visualizer_event",
+            description="""Process a Claude Code event and update the visualization.
+
+This is the main integration point for Claude Code hooks. Call this tool
+when Claude Code events occur to update the visualization in real-time.
+
+Event Types:
+- "tool_call": A tool was called
+- "skill_invoke": A skill was invoked
+- "skill_complete": A skill completed
+- "agent_spawn": An agent was spawned
+- "todo_update": TodoWrite was called
+- "error": An error occurred
+
+Example - Tool call event:
+{
+  "event_type": "tool_call",
+  "payload": {
+    "tool": "execute_sql",
+    "server": "supabase"
+  }
+}
+
+Example - Skill invoke:
+{
+  "event_type": "skill_invoke",
+  "payload": {
+    "skill": "commit"
+  }
+}
+
+Example - Todo update:
+{
+  "event_type": "todo_update",
+  "payload": {
+    "todos": [
+      {"id": "1", "content": "Task 1", "status": "completed", "activeForm": "Task 1"},
+      {"id": "2", "content": "Task 2", "status": "in_progress", "activeForm": "Task 2"}
+    ]
+  }
+}
+
+Example - Agent spawn:
+{
+  "event_type": "agent_spawn",
+  "payload": {
+    "agent_id": "task-123",
+    "agent_type": "debugger",
+    "description": "Debugging auth flow"
+  }
+}
+""",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "enum": ["tool_call", "skill_invoke", "skill_complete", "agent_spawn", "todo_update", "error"],
+                        "description": "Type of Claude Code event",
+                    },
+                    "payload": {
+                        "type": "object",
+                        "description": "Event-specific payload data",
+                    },
+                },
+                "required": ["event_type"],
+            },
+        ),
     ]
 
     return schemas

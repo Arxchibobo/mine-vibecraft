@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__vibecraft__get_player_position",
+      "mcp__vibecraft__build_schematic"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "vibecraft"
+  ]
+}

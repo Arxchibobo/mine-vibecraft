@@ -326,8 +326,8 @@ All submissions require review. We'll:
 
 ## Questions?
 
-- **Issues**: Open an [issue](https://github.com/amenti-labs/vibecraft/issues) for bugs or feature requests
-- **Discussions**: Use [GitHub Discussions](https://github.com/amenti-labs/vibecraft/discussions) for questions
+- **Issues**: Open an [issue](https://github.com/Arxchibobo/mine-vibecraft/issues) for bugs or feature requests
+- **Discussions**: Use [GitHub Discussions](https://github.com/Arxchibobo/mine-vibecraft/discussions) for questions
 - **Security**: Email security concerns to [security contact]
 
 ## License

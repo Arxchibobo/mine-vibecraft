@@ -109,6 +109,9 @@ TOOL_REGISTRY["analyze_palette_region"] = vision_tools.handle_analyze_palette_re
 # Register schematic building tool
 TOOL_REGISTRY["build_schematic"] = schematic_tools.handle_build_schematic
 
+# Import visualizer tools (Claude Code Visualizer)
+from . import visualizer_tools
+
 # Register generic WorldEdit tools (20 tools via wrapper)
 # Each WorldEdit tool uses the generic handler with its tool_name
 for tool_name in core_tools.WORLD_EDIT_TOOL_PREFIXES.keys():

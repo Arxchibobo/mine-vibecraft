@@ -276,11 +276,11 @@ MIT License - see [LICENSE](LICENSE).
 ## Support
 
 - 📧 Email: [evan@amentilabs.com](mailto:evan@amentilabs.com)
-- 🐛 Issues: [GitHub Issues](https://github.com/amenti-labs/vibecraft/issues)
+- 🐛 Issues: [GitHub Issues](https://github.com/Arxchibobo/mine-vibecraft/issues)
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=amenti-labs/vibecraft&type=Date)](https://star-history.com/#amenti-labs/vibecraft&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Arxchibobo/mine-vibecraft&type=Date)](https://star-history.com/#Arxchibobo/mine-vibecraft&Date)
 
 ---
 
