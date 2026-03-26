@@ -35,13 +35,28 @@
 
 ---
 
+## Features
+
+- **Natural language building** — describe what you want in plain English; Claude handles the rest
+- **31 MCP tools** including WorldEdit wrappers, schematic loading, terrain generation, and furniture placement
+- **Structures** — houses, castles, towers, and custom shapes via JSON schematics or procedural code
+- **Terrain** — generate, texture, and smooth landscapes using pre-computed pattern catalogs
+- **Furniture & interiors** — 80+ furniture designs with room layout templates
+- **WorldEdit integration** — auto-detects availability; falls back to vanilla `/fill` and `/setblock`
+- **450+ block catalog** with metadata and color/material guidance
+- **Building skills** — 8 guided workflows teaching Claude how to place floors, roofs, redstone, and more
+- **Multiplayer-ready** — runs as a client-side mod; works on any server you can join
+- **Safe code sandbox** — procedural builds run in an isolated Python environment
+
+---
+
 ## Quick Start
 
 ### Prerequisites
 
 - **Python 3.10+** with [uv](https://github.com/astral-sh/uv) package manager
 - **Java 21** (for Minecraft 1.21.x) or **Java 17** (for 1.20.x)
-- **jq** for build script: `brew install jq`
+- **jq** for the build script: `brew install jq`
 - **Minecraft Java Edition** with a launcher like [Prism](https://prismlauncher.org/)
 
 ### 1. Build the Client Mod
@@ -139,40 +154,6 @@ See [docs/SETUP_GUIDE.md](docs/SETUP_GUIDE.md) for:
 
 ---
 
-## Configuration
-
-### Environment Variables
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `VIBECRAFT_CLIENT_HOST` | `127.0.0.1` | Client mod WebSocket host |
-| `VIBECRAFT_CLIENT_PORT` | `8766` | Client mod WebSocket port |
-| `VIBECRAFT_CLIENT_PATH` | `/vibecraft` | WebSocket path |
-| `VIBECRAFT_WORLDEDIT_MODE` | `auto` | `auto`, `force`, or `off` |
-
-### WorldEdit Mode
-
-- **`off`** — Use vanilla `/fill` and `/setblock` commands only
-- **`auto`** — Detect WorldEdit availability, fall back to vanilla
-- **`force`** — Require WorldEdit, fail if not available
-
-Set `VIBECRAFT_WORLDEDIT_MODE=off` if you don't have WorldEdit installed.
-
-### Client Mod Commands
-
-Run these in Minecraft:
-
-| Command | Description |
-|---------|-------------|
-| `/vibecraft status` | Show bridge status |
-| `/vibecraft allow` | Enable AI control |
-| `/vibecraft deny` | Disable AI control |
-| `/vibecraft token <value>` | Set authentication token |
-| `/vibecraft port <number>` | Change WebSocket port |
-| `/vibecraft restart` | Restart the bridge |
-
----
-
 ## Usage
 
 Once connected, ask Claude to build things:
@@ -183,6 +164,12 @@ Claude: "I see these players online: Steve, Alex. Which player should I build ne
 User: "Steve"
 Claude: *builds cottage using /fill and /setblock commands*
 ```
+
+More examples:
+- `"Generate rolling hills around my position"`
+- `"Build a medieval castle with a courtyard"`
+- `"Add furniture to this room — bedroom style"`
+- `"Create a redstone-powered piston door"`
 
 ### Run from the Agent Folder
 
@@ -195,8 +182,76 @@ claude
 
 This folder has:
 - Pre-configured `.mcp.json`
-- Building skills and workflows
-- Material guides and templates
+- 8 building skills and workflows
+- Material guides and block catalogs
+
+---
+
+## Configuration
+
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `VIBECRAFT_CLIENT_HOST` | `127.0.0.1` | Client mod WebSocket host |
+| `VIBECRAFT_CLIENT_PORT` | `8766` | Client mod WebSocket port |
+| `VIBECRAFT_CLIENT_PATH` | `/vibecraft` | WebSocket path |
+| `VIBECRAFT_CLIENT_TOKEN` | _(none)_ | Optional authentication token |
+| `VIBECRAFT_WORLDEDIT_MODE` | `auto` | `auto`, `force`, or `off` |
+| `VIBECRAFT_ENABLE_SAFETY_CHECKS` | `true` | Validate commands before sending |
+| `VIBECRAFT_MAX_COMMAND_LENGTH` | `1000` | Maximum command length in characters |
+| `VIBECRAFT_BUILD_MIN_X/Y/Z` | _(none)_ | Optional build area constraints |
+| `VIBECRAFT_BUILD_MAX_X/Y/Z` | _(none)_ | Optional build area constraints |
+
+Copy `.env.example` in the `mcp-server/` folder to `.env` and edit as needed.
+
+### WorldEdit Mode
+
+- **`off`** — Use vanilla `/fill` and `/setblock` commands only
+- **`auto`** — Detect WorldEdit availability, fall back to vanilla
+- **`force`** — Require WorldEdit, fail if not available
+
+Set `VIBECRAFT_WORLDEDIT_MODE=off` if you don't have WorldEdit installed.
+
+### Client Mod Commands
+
+Run these in Minecraft chat:
+
+| Command | Description |
+|---------|-------------|
+| `/vibecraft status` | Show bridge status |
+| `/vibecraft allow` | Enable AI control |
+| `/vibecraft deny` | Disable AI control |
+| `/vibecraft token <value>` | Set authentication token |
+| `/vibecraft port <number>` | Change WebSocket port |
+| `/vibecraft restart` | Restart the bridge |
+
+---
+
+## Project Structure
+
+```
+vibecraft/
+├── agent/                    # Run Claude here to BUILD in Minecraft
+│   ├── .claude/skills/       # 8 building skills and workflows
+│   ├── context/              # Material guides, scale references, templates
+│   ├── .mcp.json             # MCP server config
+│   └── CLAUDE.md             # Agent system prompt
+│
+├── client-mod/               # Fabric client mod (Java)
+│   ├── src/                  # Mod source code
+│   ├── build.gradle          # Gradle build config
+│   └── README.md             # Mod-specific docs
+│
+├── mcp-server/               # MCP server (Python)
+│   ├── src/vibecraft/        # Server source code (31 tools)
+│   ├── data/                 # Block, furniture, and pattern catalogs (JSON)
+│   ├── server_http.py        # SSE mode entry point
+│   ├── start-vibecraft.sh    # SSE mode launcher
+│   └── pyproject.toml        # Python dependencies
+│
+└── docs/                     # Setup, configuration, and protocol guides
+```
 
 ---
 
@@ -239,39 +294,13 @@ This is useful for CI/testing but has limitations (no multiplayer, requires serv
 
 ---
 
-## Project Structure
-
-```
-vibecraft/
-├── agent/                    # Run Claude here to BUILD in Minecraft
-│   ├── .claude/skills/       # Building skills and workflows
-│   ├── context/              # Material guides, templates
-│   ├── .mcp.json             # MCP server config
-│   └── CLAUDE.md             # Agent system prompt
-│
-├── client-mod/               # Fabric client mod (Java)
-│   ├── src/                  # Mod source code
-│   ├── build.gradle          # Gradle build config
-│   └── README.md             # Mod-specific docs
-│
-├── mcp-server/               # MCP server (Python)
-│   ├── src/vibecraft/        # Server source code
-│   ├── server_http.py        # SSE mode entry point
-│   ├── start-vibecraft.sh    # SSE mode launcher
-│   └── pyproject.toml        # Python dependencies
-│
-└── README.md                 # This file
-```
-
----
-
 ## Contributing
 
 Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-MIT License - see [LICENSE](LICENSE).
+MIT License — see [LICENSE](LICENSE).
 
 ## Support
 
